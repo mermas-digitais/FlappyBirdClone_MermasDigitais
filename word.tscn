@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://drc7wwf0pad6i"]
+
+[ext_resource type="PackedScene" uid="uid://cr2d8i5sl1j01" path="res://troncos.tscn" id="3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yfdie"]
+radius = 22.0
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cax0e"]
+radius = 7.33333
+height = 20.9091
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(28, 362)
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(618, 23.5)
+
+[node name="word" type="Node2D"]
+visible = false
+
+[node name="Fundo" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(414, 215)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+follow_viewport_enabled = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 270.0
+offset_top = 14.0
+offset_right = 370.0
+offset_bottom = 94.0
+tab_size = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+position = Vector2(80, 80)
+
+[node name="player" type="CharacterBody2D" parent="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/player"]
+position = Vector2(4, 4)
+scale = Vector2(1.17647, 1.66667)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/player"]
+position = Vector2(3, 4)
+shape = SubResource("CapsuleShape2D_yfdie")
+
+[node name="Area2D" type="Area2D" parent="Node2D/player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/player/Area2D"]
+position = Vector2(3, 4)
+scale = Vector2(3, 2.2)
+shape = SubResource("CapsuleShape2D_cax0e")
+
+[node name="Area2D2" type="Area2D" parent="Node2D/player"]
+position = Vector2(8, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/player/Area2D2"]
+position = Vector2(-102, 113)
+shape = SubResource("3")
+
+[node name="Troncos" parent="." instance=ExtResource("3")]
+visible = false
+position = Vector2(568, 248)
+
+[node name="Troncos2" parent="." instance=ExtResource("3")]
+visible = false
+position = Vector2(696, 232)
+
+[node name="Troncos3" parent="." instance=ExtResource("3")]
+visible = false
+position = Vector2(824, 256)
+
+[node name="Troncos4" parent="." instance=ExtResource("3")]
+visible = false
+position = Vector2(928, 224)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+anchor_mode = 0
+
+[node name="Cima" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(311, -12)
+
+[node name="Cima" type="CollisionShape2D" parent="Cima"]
+position = Vector2(-2, 0)
+shape = SubResource("4")
+
+[node name="Terreno" type="Node2D" parent="."]
+visible = false
+
+[node name="Terreno" type="StaticBody2D" parent="Terreno"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Terreno/Terreno"]
+position = Vector2(450, 409)
+
+[node name="Terreno" type="CollisionShape2D" parent="Terreno/Terreno"]
+position = Vector2(310, 407)
+shape = SubResource("4")
+
+[connection signal="area_entered" from="Node2D/player/Area2D" to="Node2D/player" method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Node2D/player/Area2D" to="Node2D/player" method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="Node2D/player/Area2D2" to="Node2D/player" method="_on_Area2D2_area_entered"]
+[connection signal="body_entered" from="Node2D/player/Area2D2" to="Node2D/player" method="_on_Area2D2_body_entered"]
