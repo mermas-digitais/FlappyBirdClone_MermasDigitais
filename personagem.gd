@@ -8,7 +8,7 @@ const GRAVITY = 10 #Constante que vai simular um valor para a força gravitacion
 # variável responsável por receber as coordenadas da posição da personagem, mudando a posição dela e gerando a sensação de movimento
 var motion = Vector2()  #Deixar um "Vector2" vazio vai permitir que a variável possa sempre receber novos valores para as coordenadas X e Y, permitindo a movimentação da personagem
 
-var Troncos = preload("res://troncos.tscn") #É preciso colocar o caminho da Cena dos obstáculos como uma string
+var Canos = preload("res://canos.tscn") #É preciso colocar o caminho da Cena dos obstáculos como uma string
 
 #Variável que mostrará a pontuação
 var score = 0 
@@ -37,13 +37,13 @@ func _physics_process(delta):
 
 #Função que vai resetar os obstáculos
 func Troncos_reset():
-	var Troncos_instance =  Troncos.instance() #instanciamento do objeto em uma variável
-	Troncos_instance.position = Vector2(550, rand_range(-20,20)) #Configurando o instanciamento para coordenadas aleatórias entre limites definidos no eixo X/Y
-	get_parent().call_deferred("add_child", Troncos_instance) #Instancia novos objetos para se tornarem Nós Filhos do Nó Pai
+	var Canos_instance =  Canos.instance() #instanciamento do objeto em uma variável
+	Canos_instance.position = Vector2(550, rand_range(-20,20)) #Configurando o instanciamento para coordenadas aleatórias entre limites definidos no eixo X/Y
+	get_parent().call_deferred("add_child", Canos_instance) #Instancia novos objetos para se tornarem Nós Filhos do Nó Pai
 
 #Função que reseta um objeto (corpo) que adentrar uma área	
 func _on_Area2D2_body_entered(body):
-	if body.name == "Troncos":  # Se o objeto que entrar na área tiver o nome 'Troncos'...
+	if body.name == "Canos":  # Se o objeto que entrar na área tiver o nome 'Canos'...
 		body.queue_free()  #então o objeto será deletado
 		Troncos_reset() #e então respawnadp
 
@@ -54,7 +54,7 @@ func _on_Area2D_area_entered(area):
 
 # Função que determina que se o personagem entrar numa area 2D...
 func _on_Area2D_body_entered(body):
-	if body.name == "Troncos" or body.name == "Terreno":#area com o nome "Tronco" ou "Terreno"
+	if body.name == "Canos" or body.name == "Terreno":#area com o nome "Tronco" ou "Terreno"
 		get_tree().reload_current_scene()#Toda a Árvore de Cenas será reiniciada
 		
 		
