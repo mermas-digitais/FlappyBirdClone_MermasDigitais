@@ -5,7 +5,7 @@ const FLAP = 200
 const MAXFALLSPEED = 200
 const GRAVITY = 10
 var motion = Vector2()
-var Troncos = preload("res://Troncos.tscn")
+var Troncos = preload("res://troncos.tscn")
 var score = 0 
 func _ready():
 	pass

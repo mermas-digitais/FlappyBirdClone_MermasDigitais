@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1679431809
+::res://::1679483209
 default_env.tres::Environment::418089092495685771::1679431428::0::1::::<><>::
 Node2D.tscn::PackedScene::-1::1679427230::0::1::::<><>::res://fogodireita.png<>res://scripts/player.gd
 player.gd::GDScript::-1::1679429100::0::1::::<>CharacterBody2D<>::

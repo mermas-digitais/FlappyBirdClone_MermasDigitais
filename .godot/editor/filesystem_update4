@@ -1,4 +1,4 @@
 res://default_env.tres
-res://word.tscn
-res://player.gd
 res://troncos.tscn
+res://scripts/player.gd
+res://word.tscn
