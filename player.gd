@@ -1,4 +1,4 @@
-extends CharacterBody2D 
+extends KinematicBody2D 
 
 const UP = Vector2(0,-1)  #Adicionando a constante que vai representar a direção para cima em relação ao eixo X/Y na engine
 const FLAP = -200 #Constante para indicar a força da subida da personagem quando o botão for pressionado
@@ -8,7 +8,7 @@ const GRAVITY = 10 #Constante que vai simular um valor para a força gravitacion
 # variável responsável por receber as coordenadas da posição da personagem, mudando a posição dela e gerando a sensação de movimento
 var motion = Vector2()  #Deixar um "Vector2" vazio vai permitir que a variável possa sempre receber novos valores para as coordenadas X e Y, permitindo a movimentação da personagem
 
-var Troncos = preload("res://Troncos.tscn") #É preciso colocar o caminho da Cena dos obstáculos como uma string
+var Troncos = preload("res://troncos.tscn") #É preciso colocar o caminho da Cena dos obstáculos como uma string
 
 #Variável que mostrará a pontuação
 var score = 0 
@@ -29,18 +29,16 @@ func _physics_process(delta):
 		motion.y = FLAP  #Se a tecla for pressionada, a variável movimento vai receber o valor da constante 'FLAP'
 	
 	#Colocar a variável de movimento para receber a função 'move_and_slide()', que ajuda a Engine a identificar movimento linear e colisão
-	set_velocity(motion)
-	set_up_direction(UP)
-	move_and_slide()
-	motion = velocity #A função recebe como parâmetros, a variavel e a constante que indica uma direção com base em um coordenada no eixo X/Y#Essa função e parte do código que finalmente permitirão a movimentação da personagem
+	motion = move_and_slide(motion,UP) #A função recebe como parâmetros, a variavel e a constante que indica uma direção com base em um coordenada no eixo X/Y
+	 #Essa função e parte do código que finalmente permitirão a movimentação da personagem
 	
 	#Pega o valor da tela para alterá-lo
 	get_parent().get_parent().get_node("CanvasLayer/RichTextLabel").text = str(score)
 
 #Função que vai resetar os obstáculos
 func Troncos_reset():
-	var Troncos_instance =  Troncos.instantiate() #instanciamento do objeto em uma variável
-	Troncos_instance.position = Vector2(550, randf_range(-20,20)) #Configurando o instanciamento para coordenadas aleatórias entre limites definidos no eixo X/Y
+	var Troncos_instance =  Troncos.instance() #instanciamento do objeto em uma variável
+	Troncos_instance.position = Vector2(550, rand_range(-20,20)) #Configurando o instanciamento para coordenadas aleatórias entre limites definidos no eixo X/Y
 	get_parent().call_deferred("add_child", Troncos_instance) #Instancia novos objetos para se tornarem Nós Filhos do Nó Pai
 
 #Função que reseta um objeto (corpo) que adentrar uma área	
